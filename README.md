@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:2d3436,100:000000&height=180&section=header&text=Hwan%20Github&fontSize=70&fontColor=ffffff&fontAlignY=40&animation=fadeIn" width="100%" />
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:2d3436,100:000000&height=180&section=header&text=Seong+Hwan%20Github&fontSize=70&fontColor=ffffff&fontAlignY=40&animation=fadeIn" width="100%" />
 
   <div align="right">
     <a href="https://git.io/typing-svg">
