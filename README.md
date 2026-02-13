@@ -59,7 +59,6 @@
     <img src="https://img.shields.io/badge/IntelliJ%20IDEA-000000.svg?style=flat-square&logo=intellij-idea&logoColor=white">
     <img src="https://img.shields.io/badge/Eclipse-2C2255?style=flat-square&logo=eclipseide&logoColor=white">
     <img src="https://img.shields.io/badge/VSCode-0078d7.svg?style=flat-square&logo=visual-studio&logoColor=white">
-    <img src="https://img.shields.io/badge/Antigravity-4B0082?style=flat-square&logoColor=white">
     <br/>
     <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white">
     <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white">
