@@ -53,6 +53,24 @@ const languageByExtension = new Map(
   }),
 );
 
+const sourceLanguages = new Set([
+  'Java',
+  'Kotlin',
+  'TypeScript',
+  'JavaScript',
+  'Vue',
+  'Python',
+  'SQL',
+  'CSS',
+  'SCSS',
+  'HTML',
+  'Shell',
+  'Batchfile',
+  'PowerShell',
+  'Gradle',
+  'Dockerfile',
+]);
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll('&', '&amp;')
@@ -179,6 +197,7 @@ async function collectLanguageStats() {
   const stats = new Map();
   const repositories = await contributionRepositories();
   let commitCount = 0;
+  let codeCommitCount = 0;
 
   for (const repository of repositories) {
     const commits = await commitsForRepository(repository);
@@ -189,24 +208,49 @@ async function collectLanguageStats() {
         `https://api.github.com/repos/${repository}/commits/${commit.sha}`,
       );
 
+      const commitLanguages = new Map();
+
       for (const file of detail.files || []) {
         const [language, color] = languageFor(file.filename);
+        if (!sourceLanguages.has(language)) continue;
+
         const changes = Number(file.changes || 0);
         if (!changes) continue;
 
         const current =
-          stats.get(language) || { language, color, changes: 0, files: 0 };
+          commitLanguages.get(language) || { language, color, changes: 0, files: 0 };
         current.changes += changes;
         current.files += 1;
-        stats.set(language, current);
+        commitLanguages.set(language, current);
       }
+
+      const primaryLanguage = [...commitLanguages.values()].sort(
+        (a, b) => b.changes - a.changes,
+      )[0];
+
+      if (!primaryLanguage) continue;
+
+      codeCommitCount += 1;
+      const current =
+        stats.get(primaryLanguage.language) || {
+          language: primaryLanguage.language,
+          color: primaryLanguage.color,
+          commits: 0,
+          changes: 0,
+          files: 0,
+        };
+      current.commits += 1;
+      current.changes += primaryLanguage.changes;
+      current.files += primaryLanguage.files;
+      stats.set(primaryLanguage.language, current);
     }
   }
 
   return {
     commitCount,
+    codeCommitCount,
     repositories: repositories.length,
-    languages: [...stats.values()].sort((a, b) => b.changes - a.changes),
+    languages: [...stats.values()].sort((a, b) => b.commits - a.commits),
   };
 }
 
@@ -237,19 +281,27 @@ function donutSegment(cx, cy, outerRadius, innerRadius, startAngle, endAngle) {
 function compactLanguages(languages) {
   const top = languages.slice(0, 5);
   const rest = languages.slice(5);
-  const otherChanges = rest.reduce((sum, language) => sum + language.changes, 0);
-  if (otherChanges > 0) {
-    top.push({
-      language: 'Other',
-      color: '#444444',
-      changes: otherChanges,
-      files: rest.reduce((sum, language) => sum + language.files, 0),
-    });
+  const otherCommits = rest.reduce((sum, language) => sum + language.commits, 0);
+  if (otherCommits > 0) {
+    const existingOther = top.find((language) => language.language === 'Other');
+    if (existingOther) {
+      existingOther.commits += otherCommits;
+      existingOther.changes += rest.reduce((sum, language) => sum + language.changes, 0);
+      existingOther.files += rest.reduce((sum, language) => sum + language.files, 0);
+    } else {
+      top.push({
+        language: 'Other',
+        color: '#444444',
+        commits: otherCommits,
+        changes: rest.reduce((sum, language) => sum + language.changes, 0),
+        files: rest.reduce((sum, language) => sum + language.files, 0),
+      });
+    }
   }
   return top;
 }
 
-function renderSvg({ commitCount, repositories, languages }) {
+function renderSvg({ commitCount, codeCommitCount, repositories, languages }) {
   const width = 760;
   const height = 300;
   const cx = 158;
@@ -257,30 +309,30 @@ function renderSvg({ commitCount, repositories, languages }) {
   const outerRadius = 102;
   const innerRadius = 58;
   const visibleLanguages = compactLanguages(languages);
-  const totalChanges =
-    visibleLanguages.reduce((sum, language) => sum + language.changes, 0) || 1;
+  const totalCommits =
+    visibleLanguages.reduce((sum, language) => sum + language.commits, 0) || 1;
   let angle = 0;
 
   const segments = visibleLanguages
     .map((language) => {
-      const sweep = (language.changes / totalChanges) * 360;
+      const sweep = (language.commits / totalCommits) * 360;
       const start = angle;
       const end = angle + sweep;
       angle = end;
-      return `<path d="${donutSegment(cx, cy, outerRadius, innerRadius, start, end)}" fill="${language.color}" stroke="#ffffff" stroke-width="2"><title>${escapeHtml(language.language)} ${language.changes} changed lines</title></path>`;
+      return `<path d="${donutSegment(cx, cy, outerRadius, innerRadius, start, end)}" fill="${language.color}" stroke="#ffffff" stroke-width="2"><title>${escapeHtml(language.language)} ${language.commits} code commits</title></path>`;
     })
     .join('\n');
 
   const legend = visibleLanguages
     .map((language, index) => {
       const y = 102 + index * 29;
-      const percent = ((language.changes / totalChanges) * 100).toFixed(1);
+      const percent = ((language.commits / totalCommits) * 100).toFixed(1);
       return `
         <g transform="translate(330 ${y})">
           <rect width="16" height="16" rx="3" fill="${language.color}" />
           <text x="26" y="13" class="legend-name">${escapeHtml(language.language)}</text>
           <text x="278" y="13" class="legend-value">${percent}%</text>
-          <text x="360" y="13" class="legend-muted">${language.changes.toLocaleString('en-US')} lines</text>
+          <text x="360" y="13" class="legend-muted">${language.commits.toLocaleString('en-US')} commits</text>
         </g>`;
     })
     .join('\n');
@@ -289,7 +341,7 @@ function renderSvg({ commitCount, repositories, languages }) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title desc">
   <title id="title">Commit language distribution</title>
-  <desc id="desc">Languages calculated from files changed in commits authored by ${escapeHtml(username)}.</desc>
+  <desc id="desc">Languages calculated from source files changed in commits authored by ${escapeHtml(username)}.</desc>
   <style>
     * { box-sizing: border-box; }
     text { font-family: "Segoe UI", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
@@ -303,20 +355,20 @@ function renderSvg({ commitCount, repositories, languages }) {
   </style>
   <rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="8" fill="#ffffff" stroke="#d0d7de" />
   <text x="32" y="42" class="title">Commit Languages</text>
-  <text x="32" y="64" class="subtitle">Changed files from commits authored by @${escapeHtml(username)}</text>
+  <text x="32" y="64" class="subtitle">Dominant source language per commit authored by @${escapeHtml(username)}</text>
   <text x="${width - 28}" y="42" class="subtitle" text-anchor="end">${dateLabel}</text>
   <g>
     ${segments}
     <circle cx="${cx}" cy="${cy}" r="${innerRadius - 2}" fill="#ffffff" />
-    <text x="${cx}" y="${cy - 4}" text-anchor="middle" class="metric">${totalChanges.toLocaleString('en-US')}</text>
-    <text x="${cx}" y="${cy + 17}" text-anchor="middle" class="metric-label">changed lines</text>
+    <text x="${cx}" y="${cy - 4}" text-anchor="middle" class="metric">${codeCommitCount.toLocaleString('en-US')}</text>
+    <text x="${cx}" y="${cy + 17}" text-anchor="middle" class="metric-label">code commits</text>
   </g>
   ${legend}
   <g transform="translate(330 254)">
     <text class="metric">${commitCount.toLocaleString('en-US')}</text>
-    <text x="62" y="0" class="metric-label">commits</text>
-    <text x="145" y="0" class="metric">${repositories.toLocaleString('en-US')}</text>
-    <text x="183" y="0" class="metric-label">repos</text>
+    <text x="62" y="0" class="metric-label">authored commits scanned</text>
+    <text x="238" y="0" class="metric">${repositories.toLocaleString('en-US')}</text>
+    <text x="276" y="0" class="metric-label">repos</text>
   </g>
 </svg>
 `;
