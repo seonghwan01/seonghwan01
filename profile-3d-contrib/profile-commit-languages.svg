@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" role="img" aria-labelledby="title desc">
   <title id="title">Commit language distribution</title>
-  <desc id="desc">Languages calculated from files changed in commits authored by seonghwan01.</desc>
+  <desc id="desc">Languages calculated from source files changed in commits authored by seonghwan01.</desc>
   <style>
     * { box-sizing: border-box; }
     text { font-family: "Segoe UI", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
@@ -14,65 +14,65 @@
   </style>
   <rect x="0.5" y="0.5" width="759" height="299" rx="8" fill="#ffffff" stroke="#d0d7de" />
   <text x="32" y="42" class="title">Commit Languages</text>
-  <text x="32" y="64" class="subtitle">Changed files from commits authored by @seonghwan01</text>
+  <text x="32" y="64" class="subtitle">Dominant source language per commit authored by @seonghwan01</text>
   <text x="732" y="42" class="subtitle" text-anchor="end">2025-06-01 / 2026-06-01</text>
   <g>
-    <path d="M 244.767 211.624 A 102 102 0 0 0 158.000 56.000 L 158.000 100.000 A 58 58 0 0 1 207.338 188.492 Z" fill="#3178c6" stroke="#ffffff" stroke-width="2"><title>TypeScript 82110 changed lines</title></path>
-<path d="M 90.720 234.664 A 102 102 0 0 0 244.767 211.624 L 207.338 188.492 A 58 58 0 0 1 119.743 201.593 Z" fill="#b07219" stroke="#ffffff" stroke-width="2"><title>Java 67158 changed lines</title></path>
-<path d="M 63.885 118.676 A 102 102 0 0 0 90.720 234.664 L 119.743 201.593 A 58 58 0 0 1 104.484 135.639 Z" fill="#292929" stroke="#ffffff" stroke-width="2"><title>JSON 48171 changed lines</title></path>
-<path d="M 78.540 94.047 A 102 102 0 0 0 63.885 118.676 L 104.484 135.639 A 58 58 0 0 1 112.817 121.634 Z" fill="#083fa1" stroke="#ffffff" stroke-width="2"><title>Markdown 10896 changed lines</title></path>
-<path d="M 93.835 78.711 A 102 102 0 0 0 78.540 94.047 L 112.817 121.634 A 58 58 0 0 1 121.514 112.914 Z" fill="#444444" stroke="#ffffff" stroke-width="2"><title>Other 8223 changed lines</title></path>
-<path d="M 158.000 56.000 A 102 102 0 0 0 93.835 78.711 L 121.514 112.914 A 58 58 0 0 1 158.000 100.000 Z" fill="#444444" stroke="#ffffff" stroke-width="2"><title>Other 26297 changed lines</title></path>
+    <path d="M 107.284 246.498 A 102 102 0 1 0 158.000 56.000 L 158.000 100.000 A 58 58 0 1 1 129.161 208.322 Z" fill="#b07219" stroke="#ffffff" stroke-width="2"><title>Java 95 code commits</title></path>
+<path d="M 76.533 96.624 A 102 102 0 0 0 107.284 246.498 L 129.161 208.322 A 58 58 0 0 1 111.675 123.100 Z" fill="#3178c6" stroke="#ffffff" stroke-width="2"><title>TypeScript 44 code commits</title></path>
+<path d="M 116.034 65.033 A 102 102 0 0 0 76.533 96.624 L 111.675 123.100 A 58 58 0 0 1 134.137 105.136 Z" fill="#41b883" stroke="#ffffff" stroke-width="2"><title>Vue 13 code commits</title></path>
+<path d="M 138.462 57.889 A 102 102 0 0 0 116.034 65.033 L 134.137 105.136 A 58 58 0 0 1 146.890 101.074 Z" fill="#e38c00" stroke="#ffffff" stroke-width="2"><title>SQL 6 code commits</title></path>
+<path d="M 154.069 56.076 A 102 102 0 0 0 138.462 57.889 L 146.890 101.074 A 58 58 0 0 1 155.765 100.043 Z" fill="#3572A5" stroke="#ffffff" stroke-width="2"><title>Python 4 code commits</title></path>
+<path d="M 158.000 56.000 A 102 102 0 0 0 154.069 56.076 L 155.765 100.043 A 58 58 0 0 1 158.000 100.000 Z" fill="#444444" stroke="#ffffff" stroke-width="2"><title>Other 1 code commits</title></path>
     <circle cx="158" cy="158" r="56" fill="#ffffff" />
-    <text x="158" y="154" text-anchor="middle" class="metric">242,855</text>
-    <text x="158" y="175" text-anchor="middle" class="metric-label">changed lines</text>
+    <text x="158" y="154" text-anchor="middle" class="metric">163</text>
+    <text x="158" y="175" text-anchor="middle" class="metric-label">code commits</text>
   </g>
   
         <g transform="translate(330 102)">
-          <rect width="16" height="16" rx="3" fill="#3178c6" />
-          <text x="26" y="13" class="legend-name">TypeScript</text>
-          <text x="278" y="13" class="legend-value">33.8%</text>
-          <text x="360" y="13" class="legend-muted">82,110 lines</text>
+          <rect width="16" height="16" rx="3" fill="#b07219" />
+          <text x="26" y="13" class="legend-name">Java</text>
+          <text x="278" y="13" class="legend-value">58.3%</text>
+          <text x="360" y="13" class="legend-muted">95 commits</text>
         </g>
 
         <g transform="translate(330 131)">
-          <rect width="16" height="16" rx="3" fill="#b07219" />
-          <text x="26" y="13" class="legend-name">Java</text>
-          <text x="278" y="13" class="legend-value">27.7%</text>
-          <text x="360" y="13" class="legend-muted">67,158 lines</text>
+          <rect width="16" height="16" rx="3" fill="#3178c6" />
+          <text x="26" y="13" class="legend-name">TypeScript</text>
+          <text x="278" y="13" class="legend-value">27.0%</text>
+          <text x="360" y="13" class="legend-muted">44 commits</text>
         </g>
 
         <g transform="translate(330 160)">
-          <rect width="16" height="16" rx="3" fill="#292929" />
-          <text x="26" y="13" class="legend-name">JSON</text>
-          <text x="278" y="13" class="legend-value">19.8%</text>
-          <text x="360" y="13" class="legend-muted">48,171 lines</text>
+          <rect width="16" height="16" rx="3" fill="#41b883" />
+          <text x="26" y="13" class="legend-name">Vue</text>
+          <text x="278" y="13" class="legend-value">8.0%</text>
+          <text x="360" y="13" class="legend-muted">13 commits</text>
         </g>
 
         <g transform="translate(330 189)">
-          <rect width="16" height="16" rx="3" fill="#083fa1" />
-          <text x="26" y="13" class="legend-name">Markdown</text>
-          <text x="278" y="13" class="legend-value">4.5%</text>
-          <text x="360" y="13" class="legend-muted">10,896 lines</text>
+          <rect width="16" height="16" rx="3" fill="#e38c00" />
+          <text x="26" y="13" class="legend-name">SQL</text>
+          <text x="278" y="13" class="legend-value">3.7%</text>
+          <text x="360" y="13" class="legend-muted">6 commits</text>
         </g>
 
         <g transform="translate(330 218)">
-          <rect width="16" height="16" rx="3" fill="#444444" />
-          <text x="26" y="13" class="legend-name">Other</text>
-          <text x="278" y="13" class="legend-value">3.4%</text>
-          <text x="360" y="13" class="legend-muted">8,223 lines</text>
+          <rect width="16" height="16" rx="3" fill="#3572A5" />
+          <text x="26" y="13" class="legend-name">Python</text>
+          <text x="278" y="13" class="legend-value">2.5%</text>
+          <text x="360" y="13" class="legend-muted">4 commits</text>
         </g>
 
         <g transform="translate(330 247)">
           <rect width="16" height="16" rx="3" fill="#444444" />
           <text x="26" y="13" class="legend-name">Other</text>
-          <text x="278" y="13" class="legend-value">10.8%</text>
-          <text x="360" y="13" class="legend-muted">26,297 lines</text>
+          <text x="278" y="13" class="legend-value">0.6%</text>
+          <text x="360" y="13" class="legend-muted">1 commits</text>
         </g>
   <g transform="translate(330 254)">
-    <text class="metric">210</text>
-    <text x="62" y="0" class="metric-label">commits</text>
-    <text x="145" y="0" class="metric">7</text>
-    <text x="183" y="0" class="metric-label">repos</text>
+    <text class="metric">211</text>
+    <text x="62" y="0" class="metric-label">authored commits scanned</text>
+    <text x="238" y="0" class="metric">7</text>
+    <text x="276" y="0" class="metric-label">repos</text>
   </g>
 </svg>
