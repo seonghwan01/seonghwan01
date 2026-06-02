@@ -70,7 +70,7 @@
           <text x="360" y="13" class="legend-muted">1 commits</text>
         </g>
   <g transform="translate(330 254)">
-    <text class="metric">211</text>
+    <text class="metric">212</text>
     <text x="62" y="0" class="metric-label">authored commits scanned</text>
     <text x="238" y="0" class="metric">7</text>
     <text x="276" y="0" class="metric-label">repos</text>
