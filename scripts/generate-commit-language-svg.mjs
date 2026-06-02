@@ -10,6 +10,9 @@ const aliases = (process.env.AUTHOR_ALIASES || username || '')
 const outputPath =
   process.env.OUTPUT_PATH ||
   path.join('profile-3d-contrib', 'profile-commit-languages.svg');
+const gitblockPath =
+  process.env.GITBLOCK_PATH ||
+  path.join('profile-3d-contrib', 'profile-gitblock.svg');
 
 if (!token) {
   throw new Error('GITHUB_TOKEN is required.');
@@ -301,6 +304,82 @@ function compactLanguages(languages) {
   return top;
 }
 
+function compactGitblockLanguages(languages) {
+  const top = languages.slice(0, 4).map((language) => ({ ...language }));
+  const rest = languages.slice(4);
+  const otherCommits = rest.reduce((sum, language) => sum + language.commits, 0);
+  if (otherCommits > 0) {
+    top.push({
+      language: 'Other',
+      color: '#444444',
+      commits: otherCommits,
+      changes: rest.reduce((sum, language) => sum + language.changes, 0),
+      files: rest.reduce((sum, language) => sum + language.files, 0),
+    });
+  }
+  return top;
+}
+
+function renderGitblockLanguagePanel({ languages }) {
+  const visibleLanguages = compactGitblockLanguages(languages);
+  const totalCommits =
+    visibleLanguages.reduce((sum, language) => sum + language.commits, 0) || 1;
+
+  let angle = 0;
+  const donut = visibleLanguages
+    .map((language, index) => {
+      const sweep = (language.commits / totalCommits) * 360;
+      const start = angle;
+      const end = angle + sweep;
+      angle = end;
+      const opacityFrames = Array.from({ length: 9 }, (_, frame) =>
+        frame < index ? '0' : Math.min(1, (frame - index + 1) / 5).toFixed(1),
+      ).join(';');
+
+      return `<path d="${donutSegment(0, 0, 117, 65, start, end)}" style="fill: ${language.color};" class="stroke-bg" stroke-width="2px"><title>${escapeHtml(language.language)} ${language.commits}</title><animate attributeName="fill-opacity" values="${opacityFrames}" dur="3s" repeatCount="1"></animate></path>`;
+    })
+    .join('');
+
+  const legend = visibleLanguages
+    .map((language, index) => {
+      const y = 54 + index * 31;
+      const labelY = y + 11;
+      const percent = ((language.commits / totalCommits) * 100).toFixed(0);
+      const opacityFrames = Array.from({ length: 9 }, (_, frame) =>
+        frame < index ? '0' : Math.min(1, (frame - index + 1) / 5).toFixed(1),
+      ).join(';');
+
+      return `<rect x="0" y="${y}" width="20" height="20" fill="${language.color}" class="stroke-bg" stroke-width="1px"><animate attributeName="fill-opacity" values="${opacityFrames}" dur="3s" repeatCount="1"></animate></rect><text dominant-baseline="middle" x="26" y="${labelY}" class="fill-fg" font-size="18px">${escapeHtml(language.language)}<title>${language.commits} commits, ${percent}%</title><animate attributeName="fill-opacity" values="${opacityFrames}" dur="3s" repeatCount="1"></animate></text>`;
+    })
+    .join('');
+
+  return `<g transform="translate(40, 520)"><g transform="translate(273, 0)">${legend}</g><g transform="translate(130, 130)">${donut}</g></g>`;
+}
+
+async function patchGitblockSvg(result) {
+  let svg;
+  try {
+    svg = await fs.readFile(gitblockPath, 'utf8');
+  } catch (error) {
+    console.warn(`Skipping ${gitblockPath}: ${error.message}`);
+    return;
+  }
+
+  const start = svg.indexOf('<g transform="translate(40, 520)">');
+  const marker = '<g><text style="font-size: 32px; font-weight: bold;"';
+  const end = svg.indexOf(marker, start);
+
+  if (start === -1 || end === -1) {
+    throw new Error(`Could not find the language panel in ${gitblockPath}`);
+  }
+
+  const patched =
+    svg.slice(0, start) +
+    renderGitblockLanguagePanel(result) +
+    svg.slice(end);
+  await fs.writeFile(gitblockPath, patched, 'utf8');
+}
+
 function renderSvg({ commitCount, codeCommitCount, repositories, languages }) {
   const width = 760;
   const height = 300;
@@ -377,7 +456,8 @@ function renderSvg({ commitCount, codeCommitCount, repositories, languages }) {
 const result = await collectLanguageStats();
 await fs.mkdir(path.dirname(outputPath), { recursive: true });
 await fs.writeFile(outputPath, renderSvg(result), 'utf8');
+await patchGitblockSvg(result);
 
 console.log(
-  `Generated ${outputPath}: ${result.commitCount} commits, ${result.repositories} repositories`,
+  `Generated authored language SVGs: ${result.commitCount} commits, ${result.repositories} repositories`,
 );
