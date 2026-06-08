@@ -15,37 +15,37 @@
   <rect x="0.5" y="0.5" width="759" height="299" rx="8" fill="#ffffff" stroke="#d0d7de" />
   <text x="32" y="42" class="title">Commit Languages</text>
   <text x="32" y="64" class="subtitle">Dominant source language per commit authored by @seonghwan01</text>
-  <text x="732" y="42" class="subtitle" text-anchor="end">2025-06-07 / 2026-06-07</text>
+  <text x="732" y="42" class="subtitle" text-anchor="end">2025-06-08 / 2026-06-08</text>
   <g>
-    <path d="M 107.284 246.498 A 102 102 0 1 0 158.000 56.000 L 158.000 100.000 A 58 58 0 1 1 129.161 208.322 Z" fill="#b07219" stroke="#ffffff" stroke-width="2"><title>Java 95 code commits</title></path>
-<path d="M 76.533 96.624 A 102 102 0 0 0 107.284 246.498 L 129.161 208.322 A 58 58 0 0 1 111.675 123.100 Z" fill="#3178c6" stroke="#ffffff" stroke-width="2"><title>TypeScript 44 code commits</title></path>
-<path d="M 116.034 65.033 A 102 102 0 0 0 76.533 96.624 L 111.675 123.100 A 58 58 0 0 1 134.137 105.136 Z" fill="#41b883" stroke="#ffffff" stroke-width="2"><title>Vue 13 code commits</title></path>
-<path d="M 138.462 57.889 A 102 102 0 0 0 116.034 65.033 L 134.137 105.136 A 58 58 0 0 1 146.890 101.074 Z" fill="#e38c00" stroke="#ffffff" stroke-width="2"><title>SQL 6 code commits</title></path>
-<path d="M 154.069 56.076 A 102 102 0 0 0 138.462 57.889 L 146.890 101.074 A 58 58 0 0 1 155.765 100.043 Z" fill="#3572A5" stroke="#ffffff" stroke-width="2"><title>Python 4 code commits</title></path>
-<path d="M 158.000 56.000 A 102 102 0 0 0 154.069 56.076 L 155.765 100.043 A 58 58 0 0 1 158.000 100.000 Z" fill="#444444" stroke="#ffffff" stroke-width="2"><title>Other 1 code commits</title></path>
+    <path d="M 109.273 247.608 A 102 102 0 1 0 158.000 56.000 L 158.000 100.000 A 58 58 0 1 1 130.292 208.954 Z" fill="#b07219" stroke="#ffffff" stroke-width="2"><title>Java 95 code commits</title></path>
+<path d="M 74.571 99.317 A 102 102 0 0 0 109.273 247.608 L 130.292 208.954 A 58 58 0 0 1 110.560 124.632 Z" fill="#3178c6" stroke="#ffffff" stroke-width="2"><title>TypeScript 44 code commits</title></path>
+<path d="M 112.741 66.591 A 102 102 0 0 0 74.571 99.317 L 110.560 124.632 A 58 58 0 0 1 132.264 106.022 Z" fill="#41b883" stroke="#ffffff" stroke-width="2"><title>Vue 13 code commits</title></path>
+<path d="M 134.759 58.683 A 102 102 0 0 0 112.741 66.591 L 132.264 106.022 A 58 58 0 0 1 144.784 101.526 Z" fill="#e38c00" stroke="#ffffff" stroke-width="2"><title>SQL 6 code commits</title></path>
+<path d="M 150.192 56.299 A 102 102 0 0 0 134.759 58.683 L 144.784 101.526 A 58 58 0 0 1 153.560 100.170 Z" fill="#3572A5" stroke="#ffffff" stroke-width="2"><title>Python 4 code commits</title></path>
+<path d="M 158.000 56.000 A 102 102 0 0 0 150.192 56.299 L 153.560 100.170 A 58 58 0 0 1 158.000 100.000 Z" fill="#444444" stroke="#ffffff" stroke-width="2"><title>Other 2 code commits</title></path>
     <circle cx="158" cy="158" r="56" fill="#ffffff" />
-    <text x="158" y="154" text-anchor="middle" class="metric">163</text>
+    <text x="158" y="154" text-anchor="middle" class="metric">164</text>
     <text x="158" y="175" text-anchor="middle" class="metric-label">code commits</text>
   </g>
   
         <g transform="translate(330 102)">
           <rect width="16" height="16" rx="3" fill="#b07219" />
           <text x="26" y="13" class="legend-name">Java</text>
-          <text x="278" y="13" class="legend-value">58.3%</text>
+          <text x="278" y="13" class="legend-value">57.9%</text>
           <text x="360" y="13" class="legend-muted">95 commits</text>
         </g>
 
         <g transform="translate(330 131)">
           <rect width="16" height="16" rx="3" fill="#3178c6" />
           <text x="26" y="13" class="legend-name">TypeScript</text>
-          <text x="278" y="13" class="legend-value">27.0%</text>
+          <text x="278" y="13" class="legend-value">26.8%</text>
           <text x="360" y="13" class="legend-muted">44 commits</text>
         </g>
 
         <g transform="translate(330 160)">
           <rect width="16" height="16" rx="3" fill="#41b883" />
           <text x="26" y="13" class="legend-name">Vue</text>
-          <text x="278" y="13" class="legend-value">8.0%</text>
+          <text x="278" y="13" class="legend-value">7.9%</text>
           <text x="360" y="13" class="legend-muted">13 commits</text>
         </g>
 
@@ -59,20 +59,20 @@
         <g transform="translate(330 218)">
           <rect width="16" height="16" rx="3" fill="#3572A5" />
           <text x="26" y="13" class="legend-name">Python</text>
-          <text x="278" y="13" class="legend-value">2.5%</text>
+          <text x="278" y="13" class="legend-value">2.4%</text>
           <text x="360" y="13" class="legend-muted">4 commits</text>
         </g>
 
         <g transform="translate(330 247)">
           <rect width="16" height="16" rx="3" fill="#444444" />
           <text x="26" y="13" class="legend-name">Other</text>
-          <text x="278" y="13" class="legend-value">0.6%</text>
-          <text x="360" y="13" class="legend-muted">1 commits</text>
+          <text x="278" y="13" class="legend-value">1.2%</text>
+          <text x="360" y="13" class="legend-muted">2 commits</text>
         </g>
   <g transform="translate(330 254)">
-    <text class="metric">213</text>
+    <text class="metric">216</text>
     <text x="62" y="0" class="metric-label">authored commits scanned</text>
-    <text x="238" y="0" class="metric">7</text>
+    <text x="238" y="0" class="metric">8</text>
     <text x="276" y="0" class="metric-label">repos</text>
   </g>
 </svg>
