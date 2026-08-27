@@ -15,7 +15,7 @@
   <rect x="0.5" y="0.5" width="759" height="299" rx="8" fill="#ffffff" stroke="#d0d7de" />
   <text x="32" y="42" class="title">Commit Languages</text>
   <text x="32" y="64" class="subtitle">Dominant source language per commit authored by @seonghwan01</text>
-  <text x="732" y="42" class="subtitle" text-anchor="end">2025-08-26 / 2026-08-26</text>
+  <text x="732" y="42" class="subtitle" text-anchor="end">2025-08-27 / 2026-08-27</text>
   <g>
     <path d="M 109.273 247.608 A 102 102 0 1 0 158.000 56.000 L 158.000 100.000 A 58 58 0 1 1 130.292 208.954 Z" fill="#b07219" stroke="#ffffff" stroke-width="2"><title>Java 95 code commits</title></path>
 <path d="M 74.571 99.317 A 102 102 0 0 0 109.273 247.608 L 130.292 208.954 A 58 58 0 0 1 110.560 124.632 Z" fill="#3178c6" stroke="#ffffff" stroke-width="2"><title>TypeScript 44 code commits</title></path>
